@@ -1,19 +1,35 @@
 package com.israelgda.webservice.resources;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.israelgda.webservice.entities.Usuario;
+import com.israelgda.webservice.services.ServiceUsuario;
+
+
 
 @RestController
 @RequestMapping(value= "/usuarios")
 public class ResourceUsuario {
 	
+	@Autowired
+	private ServiceUsuario service;
+	
 	@GetMapping
-	public ResponseEntity<Usuario> findAll(){
-		Usuario u = new Usuario(1L, "Israel", "israel@gmail.com", "123874657", "israel123");
-		return ResponseEntity.ok().body(u);
+	public ResponseEntity<List<Usuario>> findAll(){
+		List<Usuario> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Usuario> findById(@PathVariable Long id){
+		Usuario obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
 	}
 }
