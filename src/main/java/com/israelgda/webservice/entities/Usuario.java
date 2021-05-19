@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -29,6 +31,12 @@ public class Usuario implements Serializable{
 	 * parametro "mappedBy" o campo onde se deve informar a referência da associação no outro
 	 * objeto. Deverá ser o mesmo nome de atributo da classe associada.
 	 */
+	
+	/*
+	 * Anotação JsonIgnore serve para impedir que haja um loop de consulta entre as associações
+	 * entre o usuario e o pedido.
+	 */
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Pedido> orders = new ArrayList<>();
 	
