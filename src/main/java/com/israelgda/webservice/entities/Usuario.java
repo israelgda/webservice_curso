@@ -1,11 +1,14 @@
 package com.israelgda.webservice.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable{
@@ -19,6 +22,15 @@ public class Usuario implements Serializable{
 	private String email;
 	private String telefone;
 	private String senha;
+	
+	//Associacoes
+	/*
+	 * A anotação OneToMany vai dizer que esta associação tem uma forma de um pra muitos. Sendo o
+	 * parametro "mappedBy" o campo onde se deve informar a referência da associação no outro
+	 * objeto. Deverá ser o mesmo nome de atributo da classe associada.
+	 */
+	@OneToMany(mappedBy = "client")
+	private List<Pedido> orders = new ArrayList<>();
 	
 	public Usuario() {
 		
@@ -73,6 +85,10 @@ public class Usuario implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public List<Pedido> getOrders() {
+		return orders;
 	}
 
 	//Hashcode e Equals - pelo ID do usuário
