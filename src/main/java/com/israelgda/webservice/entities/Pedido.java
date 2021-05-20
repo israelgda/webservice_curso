@@ -39,7 +39,7 @@ public class Pedido implements Serializable{
 	private Usuario client;
 	
 	//Construtores
-	private Pedido(){
+	public Pedido(){
 	}
 
 	public Pedido(Long id, Instant moment, StatusPedido statusPedido, Usuario client) {

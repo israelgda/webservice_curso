@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.israelgda.webservice.entities.Categoria;
-import com.israelgda.webservice.entities.Usuario;
 import com.israelgda.webservice.repositories.RepositoryCategorias;
 
 /*Anotação de Service serve para registrar como componente do Springboot, pelo uso do Anotation

@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "tb_categoria")
-public class Categoria implements Serializable{
+@Table(name = "tb_produto")
+public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	//Atributos
@@ -21,23 +21,29 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private String descricao;
+	private Double preco;
+	private String imgUrl;
 	
 	//Associacoes
 	@Transient
-	private Set<Produto> produtos = new HashSet<>();
+	private Set<Categoria> categorias = new HashSet<>();
 	
 	//Construtores
-	public Categoria() {
+	
+	public Produto() {
 		
 	}
 
-	public Categoria(Long id, String nome) {
+	public Produto(Long id, String nome, String descricao, Double preco, String imgUrl) {
 		this.id = id;
 		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.imgUrl = imgUrl;
 	}
-	
-	//Getters and Setters
 
+	//Getters and Setters
 	public Long getId() {
 		return id;
 	}
@@ -53,12 +59,36 @@ public class Categoria implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public Set<Produto> getProdutos() {
-		return produtos;
+
+	public String getDescricao() {
+		return descricao;
 	}
 
-	//HashCode and Equals
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public Set<Categoria> getCategorias() {
+		return categorias;
+	}
+	
+	//HashCode e Equals
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,7 +105,7 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Produto other = (Produto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

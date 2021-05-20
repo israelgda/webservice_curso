@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.israelgda.webservice.entities.Categoria;
 import com.israelgda.webservice.entities.Pedido;
+import com.israelgda.webservice.entities.Produto;
 import com.israelgda.webservice.entities.Usuario;
 import com.israelgda.webservice.entities.enums.StatusPedido;
 import com.israelgda.webservice.repositories.RepositoryCategorias;
 import com.israelgda.webservice.repositories.RepositoryPedidos;
+import com.israelgda.webservice.repositories.RepositoryProdutos;
 import com.israelgda.webservice.repositories.RepositoryUsuarios;
 
 @Configuration
@@ -28,9 +30,19 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private RepositoryCategorias repositoryCategoria;
+	
+	@Autowired
+	private RepositoryProdutos repositoryProduto;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		//Instanciação de produtos
+		Produto p1 = new Produto(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Produto p2 = new Produto(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Produto p3 = new Produto(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Produto p4 = new Produto(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Produto p5 = new Produto(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 		
 		//Instanciação de categorias
 		Categoria cat1 = new Categoria(null, "Electronics");
@@ -49,6 +61,7 @@ public class TestConfig implements CommandLineRunner{
 		repositoryUsuario.saveAll(Arrays.asList(u1, u2));
 		repositoryPedido.saveAll(Arrays.asList(o1, o2, o3));
 		repositoryCategoria.saveAll(Arrays.asList(cat1, cat2, cat3));
+		repositoryProduto.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 	}
 	
 }
