@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.israelgda.webservice.entities.enums.StatusPedido;
 
 @Entity
 public class Pedido implements Serializable{
@@ -23,6 +24,8 @@ public class Pedido implements Serializable{
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
+	
+	private Integer statusPedido;
 	
 	//Associacao
 	/*
@@ -37,10 +40,11 @@ public class Pedido implements Serializable{
 	private Pedido(){
 	}
 
-	public Pedido(Long id, Instant moment, Usuario client) {
+	public Pedido(Long id, Instant moment, StatusPedido statusPedido, Usuario client) {
 		super();
 		this.id = id;
 		this.moment = moment;
+		setStatusPedido(statusPedido);
 		this.client = client;
 	}
 
@@ -58,6 +62,17 @@ public class Pedido implements Serializable{
 
 	public void setMoment(Instant moment) {
 		this.moment = moment;
+	}
+	
+
+	public StatusPedido getStatusPedido() {
+		return StatusPedido.valueOf(statusPedido);
+	}
+
+	public void setStatusPedido(StatusPedido statusPedido) {
+		if(statusPedido != null) {
+			this.statusPedido = statusPedido.getCodigo();
+		}
 	}
 
 	public Usuario getClient() {
