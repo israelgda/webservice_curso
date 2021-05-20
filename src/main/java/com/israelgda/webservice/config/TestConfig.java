@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.israelgda.webservice.entities.Categoria;
 import com.israelgda.webservice.entities.Pedido;
 import com.israelgda.webservice.entities.Usuario;
 import com.israelgda.webservice.entities.enums.StatusPedido;
+import com.israelgda.webservice.repositories.RepositoryCategorias;
 import com.israelgda.webservice.repositories.RepositoryPedidos;
 import com.israelgda.webservice.repositories.RepositoryUsuarios;
 
@@ -23,9 +25,17 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private RepositoryPedidos repositoryPedido;
+	
+	@Autowired
+	private RepositoryCategorias repositoryCategoria;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		//Instanciação de categorias
+		Categoria cat1 = new Categoria(null, "Electronics");
+		Categoria cat2 = new Categoria(null, "Books");
+		Categoria cat3 = new Categoria(null, "Computers"); 
 		
 		//Instanciação seed dos usuários
 		Usuario u1 = new Usuario(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
@@ -38,6 +48,7 @@ public class TestConfig implements CommandLineRunner{
 		
 		repositoryUsuario.saveAll(Arrays.asList(u1, u2));
 		repositoryPedido.saveAll(Arrays.asList(o1, o2, o3));
+		repositoryCategoria.saveAll(Arrays.asList(cat1, cat2, cat3));
 	}
 	
 }
