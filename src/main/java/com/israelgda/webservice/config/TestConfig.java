@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.israelgda.webservice.entities.Categoria;
 import com.israelgda.webservice.entities.ItemPedido;
+import com.israelgda.webservice.entities.Pagamento;
 import com.israelgda.webservice.entities.Pedido;
 import com.israelgda.webservice.entities.Produto;
 import com.israelgda.webservice.entities.Usuario;
@@ -85,6 +86,10 @@ public class TestConfig implements CommandLineRunner{
 		ItemPedido oi4 = new ItemPedido(o3, p5, 2, p5.getPreco());
 		
 		repositoryItemPedido.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Pagamento pay1 = new Pagamento(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPagamento(pay1);
+		repositoryPedido.save(o1);
 		
 		
 	}
