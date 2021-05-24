@@ -49,6 +49,19 @@ public class TestConfig implements CommandLineRunner{
 		Categoria cat2 = new Categoria(null, "Books");
 		Categoria cat3 = new Categoria(null, "Computers"); 
 		
+		repositoryCategoria.saveAll(Arrays.asList(cat1, cat2, cat3));
+		repositoryProduto.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		
+		//Assossiação na JoinTable de Produtos x Categorias
+		p1.getCategorias().add(cat2);
+		p2.getCategorias().add(cat1);
+		p2.getCategorias().add(cat3);
+		p3.getCategorias().add(cat3);
+		p4.getCategorias().add(cat3);
+		p5.getCategorias().add(cat2);
+		
+		repositoryProduto.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		
 		//Instanciação seed dos usuários
 		Usuario u1 = new Usuario(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
 		Usuario u2 = new Usuario(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
@@ -60,8 +73,7 @@ public class TestConfig implements CommandLineRunner{
 		
 		repositoryUsuario.saveAll(Arrays.asList(u1, u2));
 		repositoryPedido.saveAll(Arrays.asList(o1, o2, o3));
-		repositoryCategoria.saveAll(Arrays.asList(cat1, cat2, cat3));
-		repositoryProduto.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		
 	}
 	
 }
