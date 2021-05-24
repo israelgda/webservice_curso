@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.israelgda.webservice.entities.Categoria;
+import com.israelgda.webservice.entities.ItemPedido;
 import com.israelgda.webservice.entities.Pedido;
 import com.israelgda.webservice.entities.Produto;
 import com.israelgda.webservice.entities.Usuario;
 import com.israelgda.webservice.entities.enums.StatusPedido;
 import com.israelgda.webservice.repositories.RepositoryCategorias;
+import com.israelgda.webservice.repositories.RepositoryItemPedido;
 import com.israelgda.webservice.repositories.RepositoryPedidos;
 import com.israelgda.webservice.repositories.RepositoryProdutos;
 import com.israelgda.webservice.repositories.RepositoryUsuarios;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private RepositoryProdutos repositoryProduto;
+	
+	@Autowired
+	private RepositoryItemPedido repositoryItemPedido;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -73,6 +78,14 @@ public class TestConfig implements CommandLineRunner{
 		
 		repositoryUsuario.saveAll(Arrays.asList(u1, u2));
 		repositoryPedido.saveAll(Arrays.asList(o1, o2, o3));
+		
+		ItemPedido oi1 = new ItemPedido(o1, p1, 2, p1.getPreco());
+		ItemPedido oi2 = new ItemPedido(o1, p3, 1, p3.getPreco());
+		ItemPedido oi3 = new ItemPedido(o2, p3, 2, p3.getPreco());
+		ItemPedido oi4 = new ItemPedido(o3, p5, 2, p5.getPreco());
+		
+		repositoryItemPedido.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
 		
 	}
 	
