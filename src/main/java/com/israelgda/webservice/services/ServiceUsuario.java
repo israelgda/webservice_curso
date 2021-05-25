@@ -19,6 +19,7 @@ public class ServiceUsuario {
 	@Autowired
 	private RepositoryUsuarios repository;
 	
+	//Métodos
 	public List<Usuario> findAll(){
 		return repository.findAll();
 	}
@@ -26,6 +27,11 @@ public class ServiceUsuario {
 	public Usuario findById(Long id) {
 		Optional<Usuario> obj = repository.findById(id);
 		return obj.get();
+	}
+	
+	//Insert 
+	public Usuario insert(Usuario user) {
+		return repository.save(user);
 	}
 	
 }
