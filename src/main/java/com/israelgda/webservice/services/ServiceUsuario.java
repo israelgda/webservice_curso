@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.israelgda.webservice.entities.Usuario;
 import com.israelgda.webservice.repositories.RepositoryUsuarios;
+import com.israelgda.webservice.services.exceptions.ResourceNotFoundException;
 
 /*Anotação de Service serve para registrar como componente do Springboot, pelo uso do Anotation
  *@Autowired para injecao de dependencia
@@ -26,7 +27,7 @@ public class ServiceUsuario {
 	
 	public Usuario findById(Long id) {
 		Optional<Usuario> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	//Insert 
