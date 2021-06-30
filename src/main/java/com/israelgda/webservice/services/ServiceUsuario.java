@@ -3,6 +3,8 @@ package com.israelgda.webservice.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -51,9 +53,13 @@ public class ServiceUsuario {
 	
 	//Update
 	public Usuario update(Long id, Usuario user) {
-		Usuario entity = repository.getOne(id);
-		updateData(entity, user);
-		return repository.save(entity);
+		try {
+			Usuario entity = repository.getOne(id);
+			updateData(entity, user);
+			return repository.save(entity);
+		} catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(Usuario entity, Usuario user) {
